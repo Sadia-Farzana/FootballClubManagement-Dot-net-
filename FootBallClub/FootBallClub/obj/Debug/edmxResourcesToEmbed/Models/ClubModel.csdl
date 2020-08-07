@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Coach">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <NavigationProperty Name="SignUp" Relationship="Self.FK_Coachs_SignUp" FromRole="Coachs" ToRole="SignUp" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <NavigationProperty Name="SignUp" Relationship="Self.FK_Player_SignUp" FromRole="Player" ToRole="SignUp" />
+  </EntityType>
+  <EntityType Name="SignUp">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Coach" Relationship="Self.FK_Coachs_SignUp" FromRole="SignUp" ToRole="Coachs" />
+    <NavigationProperty Name="Player" Relationship="Self.FK_Player_SignUp" FromRole="SignUp" ToRole="Player" />
+  </EntityType>
+  <Association Name="FK_Coachs_SignUp">
+    <End Role="SignUp" Type="Self.SignUp" Multiplicity="1" />
+    <End Role="Coachs" Type="Self.Coach" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SignUp">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Coachs">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_SignUp">
+    <End Role="SignUp" Type="Self.SignUp" Multiplicity="1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SignUp">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClubEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Coachs" EntityType="Self.Coach" />
+    <EntitySet Name="Players" EntityType="Self.Player" />
+    <EntitySet Name="SignUps" EntityType="Self.SignUp" />
+    <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">
+      <End Role="SignUp" EntitySet="SignUps" />
+      <End Role="Coachs" EntitySet="Coachs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_SignUp" Association="Self.FK_Player_SignUp">
+      <End Role="SignUp" EntitySet="SignUps" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
