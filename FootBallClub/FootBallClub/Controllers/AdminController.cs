@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,9 +14,15 @@ namespace FootBallClub.Controllers
         ClubEntities club = new ClubEntities();
         // GET: Admin
         [HttpGet]
-        public ActionResult Admin()
+        public ActionResult AdminDashboard()
         {
             return View();
+        }
+
+        public ActionResult UserList()
+        {
+            return View(club.SignUps.ToList());
+
         }
 
         [HttpGet]
@@ -90,6 +98,54 @@ namespace FootBallClub.Controllers
             club.SaveChanges();
 
             return RedirectToAction("UserList", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult SendEmail()
+        {
+
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult SendEmail(string receiver, string subject, string message)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("aatp4367@gmail.com", "Admin");
+                    var receiverEmail = new MailAddress(receiver, "Receiver");
+                    var password = "Test3383@";
+                    var sub = subject;
+                    var body = message;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = subject,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    return View();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
+            return View();
         }
     }
 }

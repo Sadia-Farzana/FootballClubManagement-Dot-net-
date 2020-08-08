@@ -61,11 +61,7 @@ namespace FootBallClub.Controllers
         }
 
 
-        public ActionResult UserList()
-        {
-            return View(club.SignUps.ToList());
-
-        }
+       
 
         public ActionResult PlayerList()
         {
@@ -96,23 +92,23 @@ namespace FootBallClub.Controllers
                 {
                     
                     Session["Name"] = log.Name;
-                    Session["UserName"] = log.UserName;
+                    Session["PlayerUserName"] = log.UserName;
                     return RedirectToAction("Player","Player");
                 }
                 else if (logins.Type == "Coach")
                 {
                    
                     Session["Name"] = log.Name;
-                    Session["UserName"] = log.UserName;
+                    Session["CoachUserName"] = log.UserName;
 
                     return RedirectToAction("Coach","Coach");
                 }
                 else
                 {
                     Session["Name"] = log.Name;
-                    Session["UserName"] = log.UserName;
+                    Session["AdminUserName"] = log.UserName;
 
-                    return View("Admin","Admin");
+                    return RedirectToAction("AdminDashboard", "Admin");
                 }
 
 

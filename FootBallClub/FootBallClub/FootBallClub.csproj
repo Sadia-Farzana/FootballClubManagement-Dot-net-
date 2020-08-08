@@ -133,14 +133,15 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Player\Player.cshtml" />
     <Content Include="Views\Coach\Coach.cshtml" />
-    <Content Include="Views\Home\Admin.cshtml" />
-    <Content Include="Views\Home\UserList.cshtml" />
     <Content Include="Views\Home\PlayerList.cshtml" />
     <Content Include="Views\Home\CoachList.cshtml" />
     <Content Include="Views\Player\PlayerListEdit.cshtml" />
     <Content Include="Views\Coach\CoachListEdit.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Admin\SendEmail.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ClubModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

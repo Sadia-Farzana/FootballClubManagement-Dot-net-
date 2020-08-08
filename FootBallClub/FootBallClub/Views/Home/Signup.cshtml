@@ -1,6 +1,11 @@
 ﻿@model FootBallClub.Models.SignUp
 
 @{
+    if (Session["AdminUserName"] == null)
+    {
+        Response.Redirect("../Home/Login");
+    }
+
     ViewBag.Title = "Signup";
 }
 

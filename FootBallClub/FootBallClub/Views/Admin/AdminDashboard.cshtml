@@ -1,0 +1,9 @@
+﻿@{
+    if (Session["AdminUserName"] == null)
+    {
+        Response.Redirect("../Home/Login");
+    }
+
+}
+
+<h2>Admin Dashboard</h2>

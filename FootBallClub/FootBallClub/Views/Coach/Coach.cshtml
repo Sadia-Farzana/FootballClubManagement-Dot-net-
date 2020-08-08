@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Coach";
-    if (Session["Id"] == null)
+    if (Session["CoachUserName"] == null)
     {
         Response.Redirect("../Home/Login");
     }
 }
 
 <h2>Coach DashBoard</h2>
-<h2>Welcome @Session["Name"]</h2>
+<h2>Welcome @Session["CoachUserName"]</h2>

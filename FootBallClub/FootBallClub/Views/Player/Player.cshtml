@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Player";
-    if (Session["Id"] == null)
+    if (Session["PlayerUsername"] == null)
     {
         Response.Redirect("../Home/Login");
     }
