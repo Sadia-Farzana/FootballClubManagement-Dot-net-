@@ -22,46 +22,65 @@ namespace FootBallClub.Controllers
             return View();
 
         }
+
+      
         [HttpPost]
         public ActionResult Signup(SignUp sign)
         {
-            //Signup s = new Signup();
-            club.SignUps.Add(sign);
-            club.SaveChanges();
-            var test = club.SignUps.Where(x => x.Type == sign.Type).FirstOrDefault();
-            if (test.Type == "Player")
+            try
             {
-                Player p = new Player();
-                p.UserName = sign.UserName;
-                p.Name = sign.Name;
-                p.Password = sign.Password;
-                p.Salary = sign.Salary;
-                p.Email = sign.Email;
-                club.Players.Add(p);
+                club.SignUps.Add(sign);
                 club.SaveChanges();
-                return RedirectToAction("PlayerList");
-            }
-            else
-            {
-                Coach c = new Coach();
-                c.UserName = sign.UserName;
-                c.Name = sign.Name;
-                c.Password = sign.Password;
-                c.Salary = sign.Salary;
-                c.Email = sign.Email;
+                ModelState.Clear();
+                @ViewBag.SuccessMessage = "Registration Successfull";
+                var test = club.SignUps.Where(x => x.Type == sign.Type).FirstOrDefault();
+                if (test.Type == "Player")
+                {
+                    Player p = new Player();
+                    p.UserName = sign.UserName;
+                    p.Name = sign.Name;
+                    p.Password = sign.Password;
+                    p.Salary = sign.Salary;
+                    p.Email = sign.Email;
+                    club.Players.Add(p);
+                    club.SaveChanges();
+                    @ViewBag.SuccessMessage = "Registration Successfull";
+                    return RedirectToAction("PlayerList");
+                }
+                else if (test.Type == "Coach")
+                {
+                    Coach c = new Coach();
+                    c.UserName = sign.UserName;
+                    c.Name = sign.Name;
+                    c.Password = sign.Password;
+                    c.Salary = sign.Salary;
+                    c.Email = sign.Email;
+
+                    club.Coachs.Add(c);
+                    club.SaveChanges();
+                    @ViewBag.SuccessMessage = "Registration Successfull";
+                    return RedirectToAction("CoachList");
+
+                }
               
-                club.Coachs.Add(c);
-                club.SaveChanges();
-                return RedirectToAction("CoachList");
+                else
+                {
+                    return RedirectToAction("UserList", "Admin");
 
 
+                }
 
             }
+            catch (Exception)
+            {
+                ViewBag.Error = "Some Error";
+            }
 
+            return View();
         }
 
 
-       
+
 
         public ActionResult PlayerList()
         {
@@ -93,7 +112,7 @@ namespace FootBallClub.Controllers
                     
                     Session["Name"] = log.Name;
                     Session["PlayerUserName"] = log.UserName;
-                    return RedirectToAction("Player","Player");
+                    return RedirectToAction("PlayerProfile","Player");
                 }
                 else if (logins.Type == "Coach")
                 {
@@ -129,10 +148,6 @@ namespace FootBallClub.Controllers
             return RedirectToAction("Login");
         }
 
-        [HttpGet]
-        public ActionResult Admin()
-        {
-            return View();
-        }
+        
     }
 }

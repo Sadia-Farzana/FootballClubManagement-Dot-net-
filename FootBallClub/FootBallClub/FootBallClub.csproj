@@ -131,7 +131,7 @@
     <Content Include="Web.config" />
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Player\Player.cshtml" />
+    <Content Include="Views\Player\PlayerProfile.cshtml" />
     <Content Include="Views\Coach\Coach.cshtml" />
     <Content Include="Views\Home\PlayerList.cshtml" />
     <Content Include="Views\Home\CoachList.cshtml" />
@@ -195,6 +195,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Player\PlayerList.cshtml" />
+    <Content Include="Views\Coach\CoachList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

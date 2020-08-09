@@ -14,6 +14,11 @@ namespace FootBallClub.Controllers
         {
             return View();
         }
+        public ActionResult CoachList()
+        {
+            return View(club.Coachs.ToList());
+        }
+
         ClubEntities club = new ClubEntities();
 
         [HttpGet]

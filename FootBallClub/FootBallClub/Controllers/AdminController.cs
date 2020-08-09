@@ -16,7 +16,11 @@ namespace FootBallClub.Controllers
         [HttpGet]
         public ActionResult AdminDashboard()
         {
-            return View();
+
+            var username = Session["AdminUserName"];
+            var sign = club.SignUps.Where(x => x.UserName == username).FirstOrDefault();
+
+            return View(sign);
         }
 
         public ActionResult UserList()
@@ -59,7 +63,7 @@ namespace FootBallClub.Controllers
                 player.Name = sign.Name;
                 player.Password = sign.Password;
                 player.Email = sign.Email;
-                //player.Salary = sign.Salary;
+                player.Salary = sign.Salary;
                 club.SaveChanges();
             }
             else if (test.Type == "Coach")
@@ -78,7 +82,7 @@ namespace FootBallClub.Controllers
             }
 
 
-            return RedirectToAction("UserList", "Home");
+            return RedirectToAction("UserList", "Admin");
 
         }
 
@@ -94,11 +98,28 @@ namespace FootBallClub.Controllers
         public ActionResult ConfrimDelete(string id)
         {
             SignUp sign = club.SignUps.Where(x => x.UserName == id).FirstOrDefault();
+            Player player = club.Players.Where(x => x.UserName == id).FirstOrDefault();
+            Coach coach = club.Coachs.Where(x => x.UserName == id).FirstOrDefault();
+
             club.SignUps.Remove(sign);
             club.SaveChanges();
-
-            return RedirectToAction("UserList", "Home");
+           /* var test = club.SignUps.Where(x => x.Type == sign.Type).FirstOrDefault();
+            if(test.Type == "Player")
+            {
+                club.Players.Remove(player);
+                club.SaveChanges();
+            }
+            else
+            {
+                club.Coachs.Remove(coach);
+                club.SaveChanges();
+            }*/
+           
+          
+       
+            return RedirectToAction("UserList", "Admin");
         }
+
 
         [HttpGet]
         public ActionResult SendEmail()

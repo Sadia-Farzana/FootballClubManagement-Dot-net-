@@ -10,9 +10,10 @@ namespace FootBallClub.Controllers
     public class PlayerController : Controller
     {
         ClubEntities club = new ClubEntities();
-        public ActionResult Player()
+        public ActionResult PlayerList()
         {
-            return View();
+            return View(club.Players.ToList());
+
         }
 
         [HttpGet]
@@ -47,11 +48,19 @@ namespace FootBallClub.Controllers
                          select item;
             sign = s.FirstOrDefault();
             sign.Name = player.Name;
-            
             sign.Email = player.Email;
             sign.Password = player.Password;
             club.SaveChanges();
-            return RedirectToAction("PlayerList", "Home");
+            return RedirectToAction("PlayerList", "Player");
+        }
+        [HttpGet]
+        public ActionResult PlayerProfile()
+        {
+            var username = Session["PlayerUserName"];
+            var player = club.Players.Where(x => x.UserName == username).FirstOrDefault();
+
+            return View(player);
         }
     }
+
 }

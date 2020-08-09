@@ -11,13 +11,33 @@ namespace FootBallClub.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SignUp
     {
+        [Required(ErrorMessage = "Enter Username :")]
+        [Display(Name = "Username  ")]
+        [StringLength(maximumLength: 4, MinimumLength = 4, ErrorMessage = "Username length must be 4")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Enter Name :")]
+        [Display(Name = " Name  ")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Enter Password :")]
+        [Display(Name = " Password  ")]
+        [DataType(DataType.Password)]
+        [StringLength(maximumLength: 20, MinimumLength = 6, ErrorMessage = "Password has to be 6 length")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Enter Email :")]
+        [Display(Name = " Email  ")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "Enter Salary :")]
+        [Display(Name = " Salary  ")]
+        [Range(0, 200000)]
         public double Salary { get; set; }
         public string Type { get; set; }
         public string ErrorMessage { get; set; }
