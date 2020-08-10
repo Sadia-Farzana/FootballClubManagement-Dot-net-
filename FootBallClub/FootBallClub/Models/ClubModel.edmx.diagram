@@ -4,9 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2a0854608034a41af09eb3cdab535a1" Name="Diagram1">
+      <Diagram DiagramId="1bd5e7bec675434787d1b9e1173bc48d" Name="Diagram1">
         <EntityTypeShape EntityType="ClubModel.Coach" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ClubModel.History" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClubModel.Match" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClubModel.Player" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ClubModel.SignUp" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="ClubModel.FK_Coachs_SignUp" ManuallyRouted="false" />

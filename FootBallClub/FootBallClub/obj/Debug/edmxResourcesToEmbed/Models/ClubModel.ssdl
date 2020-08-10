@@ -14,6 +14,28 @@
     <Property Name="Designation" Type="varchar" MaxLength="50" />
     <Property Name="Salary" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Seasons" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tournament" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Achievements" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Coach" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Matches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Date" Type="datetime" />
+    <Property Name="OppositeTeam" Type="varchar" MaxLength="50" />
+    <Property Name="Result" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="int" />
+    <Property Name="Goals" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="nchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="Player">
     <Key>
       <PropertyRef Name="UserName" />
@@ -65,6 +87,8 @@
   </Association>
   <EntityContainer Name="ClubModelStoreContainer">
     <EntitySet Name="Coachs" EntityType="Self.Coachs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SignUp" EntityType="Self.SignUp" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">

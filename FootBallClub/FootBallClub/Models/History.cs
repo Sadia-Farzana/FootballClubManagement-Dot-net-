@@ -17,6 +17,7 @@ namespace FootBallClub.Models
         public int Id { get; set; }
         public string Seasons { get; set; }
         public string Tournament { get; set; }
-        public string Achievement { get; set; }
+        public string Achievements { get; set; }
+        public string Coach { get; set; }
     }
 }

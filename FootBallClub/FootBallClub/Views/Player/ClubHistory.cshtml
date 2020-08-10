@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FootBallClub.Models.History>
+
+@{
+    ViewBag.Title = "ClubHistory";
+}
+
+<h2>ClubHistory</h2>
+
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Seasons)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tournament)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Achievements)
+        </th>
+
+      
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.Seasons)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tournament)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tournament)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Achievements)
+    </td>
+   
+</tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Back to Profile", "PlayerProfile")
+</div>

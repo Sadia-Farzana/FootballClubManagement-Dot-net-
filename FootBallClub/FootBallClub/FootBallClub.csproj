@@ -111,7 +111,7 @@
     <Content Include="Models\ClubModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClubModel.edmx</DependentUpon>
-      <LastGenOutput>ClubModel.cs</LastGenOutput>
+      <LastGenOutput>ClubModel1.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -152,23 +152,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\ClubModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClubModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClubModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ClubModel.cs" />
     <Compile Include="Models\ClubModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClubModel1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Coach.cs">
+      <DependentUpon>ClubModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\History.cs">
+      <DependentUpon>ClubModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Match.cs">
       <DependentUpon>ClubModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Player.cs">
@@ -197,6 +203,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Player\PlayerList.cshtml" />
     <Content Include="Views\Coach\CoachList.cshtml" />
+    <Content Include="Views\Player\ClubHistory.cshtml" />
+    <Content Include="Views\Admin\ClubHistory.cshtml" />
+    <Content Include="Views\Admin\HistoryEdit.cshtml" />
+    <Content Include="Views\Admin\HistoryDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -93,9 +93,6 @@
 </div>
 <h2>CoachList</h2>
 
-<p>
-    @Html.ActionLink("Add new", "Signup")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -172,4 +169,7 @@
 </table>
 <div colspane="4" style="text-align:right">
     <h2>Invesment on Coach : @invesment.ToString() BDT</h2>
+</div>
+<div>
+    @Html.ActionLink("Back to Profile", "../Admin/AdminDashboard")
 </div>

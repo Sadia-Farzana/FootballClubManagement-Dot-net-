@@ -27,6 +27,7 @@ namespace FootBallClub.Models
     
         public virtual DbSet<Coach> Coachs { get; set; }
         public virtual DbSet<History> Histories { get; set; }
+        public virtual DbSet<Match> Matches { get; set; }
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<SignUp> SignUps { get; set; }
     }

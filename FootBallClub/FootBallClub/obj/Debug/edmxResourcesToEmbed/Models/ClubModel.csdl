@@ -15,6 +15,28 @@
     <Property Name="Salary" Type="Double" Nullable="false" />
     <NavigationProperty Name="SignUp" Relationship="Self.FK_Coachs_SignUp" FromRole="Coachs" ToRole="SignUp" />
   </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Seasons" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tournament" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Achievements" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Coach" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Match">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="OppositeTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Result" Type="Int32" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Point" Type="Int32" />
+    <Property Name="Goals" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
   <EntityType Name="Player">
     <Key>
       <PropertyRef Name="UserName" />
@@ -69,6 +91,8 @@
   </Association>
   <EntityContainer Name="ClubEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Coachs" EntityType="Self.Coach" />
+    <EntitySet Name="Histories" EntityType="Self.History" />
+    <EntitySet Name="Matches" EntityType="Self.Match" />
     <EntitySet Name="Players" EntityType="Self.Player" />
     <EntitySet Name="SignUps" EntityType="Self.SignUp" />
     <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">

@@ -26,7 +26,20 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Seasons" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Tournament" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Achievement" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Achievements" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Coach" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Date" Type="datetime" />
+          <Property Name="OppositeTeam" Type="varchar" MaxLength="50" />
+          <Property Name="Result" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="int" />
+          <Property Name="Goals" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -80,6 +93,7 @@
         <EntityContainer Name="ClubModelStoreContainer">
           <EntitySet Name="Coachs" EntityType="Self.Coachs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SignUp" EntityType="Self.SignUp" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">
@@ -118,7 +132,20 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Seasons" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tournament" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Achievement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Achievements" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Coach" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="OppositeTeam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Result" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="Int32" />
+          <Property Name="Goals" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Player">
           <Key>
@@ -175,6 +202,7 @@
         <EntityContainer Name="ClubEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Coachs" EntityType="Self.Coach" />
           <EntitySet Name="Histories" EntityType="Self.History" />
+          <EntitySet Name="Matches" EntityType="Self.Match" />
           <EntitySet Name="Players" EntityType="Self.Player" />
           <EntitySet Name="SignUps" EntityType="Self.SignUp" />
           <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">
@@ -213,7 +241,21 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Seasons" ColumnName="Seasons" />
                 <ScalarProperty Name="Tournament" ColumnName="Tournament" />
-                <ScalarProperty Name="Achievement" ColumnName="Achievement" />
+                <ScalarProperty Name="Achievements" ColumnName="Achievements" />
+                <ScalarProperty Name="Coach" ColumnName="Coach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matches">
+            <EntityTypeMapping TypeName="ClubModel.Match">
+              <MappingFragment StoreEntitySet="Matches">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="OppositeTeam" ColumnName="OppositeTeam" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Goals" ColumnName="Goals" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

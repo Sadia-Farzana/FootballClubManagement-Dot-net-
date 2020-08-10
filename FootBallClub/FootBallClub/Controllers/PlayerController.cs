@@ -61,6 +61,12 @@ namespace FootBallClub.Controllers
 
             return View(player);
         }
+
+
+        public ActionResult ClubHistory()
+        {
+            return View(club.Histories.ToList());
+        }
     }
 
 }

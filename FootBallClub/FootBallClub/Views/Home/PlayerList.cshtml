@@ -93,9 +93,8 @@
 </div>
 <h2>PlayerList</h2>
 
-<p>
-    @Html.ActionLink("Add new", "Signup")
-</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -166,4 +165,7 @@
 </table>
 <div colspane="4" style="text-align:right">
     <h2>Invesment on Player : @totalinvestment.ToString() BDT</h2>
+</div>
+<div>
+    @Html.ActionLink("Back to Profile", "../Admin/AdminDashboard")
 </div>

@@ -168,5 +168,53 @@ namespace FootBallClub.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ClubHistory()
+        {
+            return View(club.Histories.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult HistoryEdit(int id)
+        {
+
+            var result = from item in club.Histories
+                         where item.Id == id
+                         select item;
+            History his = result.FirstOrDefault();
+            return View(his);
+        }
+        [HttpPost]
+        public ActionResult HistoryEdit(History h, int id)
+        {
+            var result = from item in club.Histories
+                         where item.Id == id
+                         select item;
+            History his = result.FirstOrDefault();
+            his.Seasons = h.Seasons;
+            his.Tournament = h.Tournament;
+            his.Coach = h.Coach;
+            his.Achievements = h.Achievements;
+            club.SaveChanges();
+            return RedirectToAction("ClubHistory", "Home");
+        }
+        [HttpGet]
+        public ActionResult HistoryDelete(int id)
+        {
+            History his = club.Histories.Where(x => x.Id == id).FirstOrDefault();
+            return View(his);
+        }
+
+        [HttpPost, ActionName("HistoryDelete")]
+        public ActionResult ConfrimDelete(int id)
+        {
+            History his = club.Histories.Where(x => x.Id == id).FirstOrDefault();
+            club.Histories.Remove(his);
+            club.SaveChanges();
+
+            return RedirectToAction("ClubHistory", "Home");
+        }
+
     }
 }

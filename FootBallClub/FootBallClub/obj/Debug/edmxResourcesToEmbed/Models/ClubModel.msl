@@ -16,6 +16,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Histories">
+      <EntityTypeMapping TypeName="ClubModel.History">
+        <MappingFragment StoreEntitySet="History">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Seasons" ColumnName="Seasons" />
+          <ScalarProperty Name="Tournament" ColumnName="Tournament" />
+          <ScalarProperty Name="Achievements" ColumnName="Achievements" />
+          <ScalarProperty Name="Coach" ColumnName="Coach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matches">
+      <EntityTypeMapping TypeName="ClubModel.Match">
+        <MappingFragment StoreEntitySet="Matches">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="OppositeTeam" ColumnName="OppositeTeam" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="Goals" ColumnName="Goals" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Players">
       <EntityTypeMapping TypeName="ClubModel.Player">
         <MappingFragment StoreEntitySet="Player">
