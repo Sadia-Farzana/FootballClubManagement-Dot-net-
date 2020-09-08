@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Coachs">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Age" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="float" Nullable="false" />
+    <Property Name="Iamge" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlayerUserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MatchId" Type="int" Nullable="false" />
+    <Property Name="NumberOfGoals" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Card" Type="varchar" MaxLength="50" />
+    <Property Name="Point" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Seasons" Type="varchar" MaxLength="50" />
+    <Property Name="Tournament" Type="varchar" MaxLength="50" />
+    <Property Name="Coach" Type="varchar" MaxLength="50" />
+    <Property Name="Achivements" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Matches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Date" Type="datetime" />
+    <Property Name="OppositeTeam" Type="varchar" MaxLength="50" />
+    <Property Name="Result" Type="int" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Point" Type="int" />
+    <Property Name="Goals" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="nchar" MaxLength="500" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Age" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="50" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+    <Property Name="Position" Type="varchar" MaxLength="50" />
+    <Property Name="Salary" Type="float" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SignUp">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="float" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeamForMatch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Note" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="bit" />
+    <Property Name="MatchID" Type="int" />
+    <Property Name="Team" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Coachs_SignUp">
+    <End Role="SignUp" Type="Self.SignUp" Multiplicity="1" />
+    <End Role="Coachs" Type="Self.Coachs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SignUp">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Coachs">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Goals_Matches">
+    <End Role="Matches" Type="Self.Matches" Multiplicity="1" />
+    <End Role="Goals" Type="Self.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Matches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goals">
+        <PropertyRef Name="MatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Goals_Player">
+    <End Role="Player" Type="Self.Player" Multiplicity="1" />
+    <End Role="Goals" Type="Self.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Goals">
+        <PropertyRef Name="PlayerUserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notification_SignUp">
+    <End Role="SignUp" Type="Self.SignUp" Multiplicity="1" />
+    <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SignUp">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_SignUp">
+    <End Role="SignUp" Type="Self.SignUp" Multiplicity="1" />
+    <End Role="Player" Type="Self.Player" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SignUp">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="UserName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeamForMatch_Matches">
+    <End Role="Matches" Type="Self.Matches" Multiplicity="0..1" />
+    <End Role="TeamForMatch" Type="Self.TeamForMatch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Matches">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeamForMatch">
+        <PropertyRef Name="MatchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeamForMatch_Player">
+    <End Role="Player" Type="Self.Player" Multiplicity="1" />
+    <End Role="TeamForMatch" Type="Self.TeamForMatch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="TeamForMatch">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClubModelStoreContainer">
+    <EntitySet Name="Coachs" EntityType="Self.Coachs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Goals" EntityType="Self.Goals" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Matches" EntityType="Self.Matches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SignUp" EntityType="Self.SignUp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TeamForMatch" EntityType="Self.TeamForMatch" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Coachs_SignUp" Association="Self.FK_Coachs_SignUp">
+      <End Role="SignUp" EntitySet="SignUp" />
+      <End Role="Coachs" EntitySet="Coachs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Goals_Matches" Association="Self.FK_Goals_Matches">
+      <End Role="Matches" EntitySet="Matches" />
+      <End Role="Goals" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Goals_Player" Association="Self.FK_Goals_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="Goals" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notification_SignUp" Association="Self.FK_Notification_SignUp">
+      <End Role="SignUp" EntitySet="SignUp" />
+      <End Role="Notification" EntitySet="Notification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_SignUp" Association="Self.FK_Player_SignUp">
+      <End Role="SignUp" EntitySet="SignUp" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeamForMatch_Matches" Association="Self.FK_TeamForMatch_Matches">
+      <End Role="Matches" EntitySet="Matches" />
+      <End Role="TeamForMatch" EntitySet="TeamForMatch" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeamForMatch_Player" Association="Self.FK_TeamForMatch_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="TeamForMatch" EntitySet="TeamForMatch" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
